@@ -1,0 +1,14 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+  // For GitHub Pages deployment
+  // basePath and assetPrefix will be set via environment variables
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || "",
+};
+
+export default nextConfig;

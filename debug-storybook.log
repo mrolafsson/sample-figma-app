@@ -1,0 +1,87 @@
+[08:54:49.620] [INFO] Initializing Storybook
+[08:54:50.419] [DEBUG] Getting package.json info for /home/user/sample-figma-app/package.json...
+[08:54:50.420] [DEBUG] Getting CLI versions from NPM for storybook...
+[08:54:50.421] [DEBUG] Executing command: npm info storybook version
+[08:54:52.124] [INFO] Adding Storybook version 10.1.11 to your project
+[08:54:52.126] [DEBUG] Project type detected: nextjs
+[08:54:52.127] [DEBUG] Using cached package.json for /home/user/sample-figma-app/package.json...
+[08:54:52.134] [INFO] Framework detected: nextjs-vite
+[08:54:52.135] [DEBUG] Getting installed version for vitest...
+[08:54:52.135] [DEBUG] Executing command: npm ls --json --depth=99 2>/dev/null
+[08:54:54.418] [DEBUG] Executing command: npm ls --json --depth=0 2>/dev/null
+[08:54:56.537] [DEBUG] An issue occurred while trying to find dependencies metadata using npm: Error: Command failed with exit code 1: npm ls --json --depth=0 2>/dev/null
+{
+  "version": "0.1.0",
+  "name": "sample-figma-app"
+}
+[08:54:56.537] [DEBUG] Getting installed version for msw...
+[08:54:56.537] [DEBUG] Executing command: npm ls --json --depth=99 2>/dev/null
+[08:54:58.798] [DEBUG] Executing command: npm ls --json --depth=0 2>/dev/null
+[08:55:00.871] [DEBUG] An issue occurred while trying to find dependencies metadata using npm: Error: Command failed with exit code 1: npm ls --json --depth=0 2>/dev/null
+{
+  "version": "0.1.0",
+  "name": "sample-figma-app"
+}
+[08:55:00.879] [DEBUG] Using cached package.json for /home/user/sample-figma-app/package.json...
+[08:55:00.879] [DEBUG] Using cached package.json for /home/user/sample-figma-app/package.json...
+[08:55:00.880] [DEBUG] Using cached package.json for /home/user/sample-figma-app/package.json...
+[08:55:00.881] [INFO] - Configuring ESLint plugin
+[08:55:00.881] [DEBUG] Detected flat config at /home/user/sample-figma-app/eslint.config.mjs
+[08:55:00.916] [DEBUG] Using cached version for storybook...
+[08:55:00.916] [DEBUG] Getting CLI versions from NPM for @storybook/nextjs-vite...
+[08:55:00.916] [DEBUG] Executing command: npm info @storybook/nextjs-vite version
+[08:55:00.933] [DEBUG] Getting CLI versions from NPM for @chromatic-com/storybook...
+[08:55:00.933] [DEBUG] Executing command: npm info @chromatic-com/storybook version
+[08:55:00.945] [DEBUG] Getting CLI versions from NPM for @storybook/addon-vitest...
+[08:55:00.945] [DEBUG] Executing command: npm info @storybook/addon-vitest version
+[08:55:00.959] [DEBUG] Getting CLI versions from NPM for @storybook/addon-a11y...
+[08:55:00.959] [DEBUG] Executing command: npm info @storybook/addon-a11y version
+[08:55:00.975] [DEBUG] Getting CLI versions from NPM for @storybook/addon-docs...
+[08:55:00.975] [DEBUG] Executing command: npm info @storybook/addon-docs version
+[08:55:00.989] [DEBUG] Getting CLI versions from NPM for @storybook/addon-onboarding...
+[08:55:00.989] [DEBUG] Executing command: npm info @storybook/addon-onboarding version
+[08:55:01.004] [DEBUG] Getting CLI versions from NPM for vite...
+[08:55:01.004] [DEBUG] Executing command: npm info vite version
+[08:55:01.020] [DEBUG] Getting CLI versions from NPM for eslint-plugin-storybook...
+[08:55:01.020] [DEBUG] Executing command: npm info eslint-plugin-storybook version
+[08:55:04.875] [INFO] - Configuring main.ts
+[08:55:04.877] [INFO] - Configuring preview.ts
+[08:55:04.878] [INFO] - Adding Storybook command to package.json
+[08:55:04.879] [DEBUG] Getting package.json info for /home/user/sample-figma-app/package.json...
+[08:55:04.879] [DEBUG] Using cached package.json for /home/user/sample-figma-app/package.json...
+[08:55:04.879] [INFO] - Copying framework templates
+[08:55:04.920] [DEBUG] Executing command: npm config get registry -ws=false -iwr
+[08:55:05.215] [ERROR] [38;2;241;97;97mError: Cannot find @storybook/nextjs-vite/package.json, Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/nextjs-vite' imported from /root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-O7UZQAUS.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:314:9)
+    at packageResolve (node:internal/modules/esm/resolve:767:81)
+    at moduleResolve (node:internal/modules/esm/resolve:853:18)
+    at defaultResolve (node:internal/modules/esm/resolve:983:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:731:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:767:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:790:52)
+    at Object.resolve (node:internal/modules/esm/initialize_import_meta:35:25)
+    at importMetaResolve (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-O7UZQAUS.js:717:48)
+    at resolvePackageDir (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-O7UZQAUS.js:721:35)
+
+TypeError: fetch failed
+    at node:internal/deps/undici/undici:14900:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async resolveUsingBranchInstall (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-JLFR6DEF.js:5383:18)
+    at async getRendererDir (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-JLFR6DEF.js:5405:12)
+    at async templatePath (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-JLFR6DEF.js:5483:19)
+    at async copyTemplateFiles (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-JLFR6DEF.js:5498:17)
+    at async baseGenerator (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:1277:152)
+    at async GeneratorExecutionCommand.executeProjectGenerator (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:1345:101)
+    at async GeneratorExecutionCommand.execute (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:1367:27)
+    at async doInitiate (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:2279:68)[39m
+    at getRendererDir (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-JLFR6DEF.js:5409:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async templatePath (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-JLFR6DEF.js:5483:19)
+    at async copyTemplateFiles (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-JLFR6DEF.js:5498:17)
+    at async baseGenerator (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:1277:152)
+    at async GeneratorExecutionCommand.executeProjectGenerator (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:1345:101)
+    at async GeneratorExecutionCommand.execute (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:1367:27)
+    at async doInitiate (file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:2279:68)
+    at async file:///root/.npm/_npx/96f9239703459233/node_modules/create-storybook/dist/_node-chunks/chunk-C75MJVFW.js:2322:20
+    at async withTelemetry (file:///root/.npm/_npx/96f9239703459233/node_modules/storybook/dist/_node-chunks/chunk-2372JZ52.js:209:12)
+[08:55:05.224] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
