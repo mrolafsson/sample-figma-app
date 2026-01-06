@@ -2,67 +2,50 @@
 
 import { useState } from "react";
 import {
-  LayoutDashboard,
-  Users,
-  FileText,
-  CreditCard,
-  Settings,
-  Bell,
-  Search,
-  Plus,
+  BookOpen,
+  Cloud,
+  Pencil,
+  Palette,
+  Undo2,
+  Redo2,
+  Bold,
+  Italic,
+  Underline,
+  List,
+  ListOrdered,
+  AlignLeft,
+  Link,
+  Type,
+  ImageIcon,
+  Zap,
+  X,
+  Copy,
+  Trash2,
+  Sparkles,
+  Monitor,
+  Tablet,
+  Smartphone,
+  Code,
+  Share2,
+  Download,
+  ChevronDown,
   MoreHorizontal,
-  TrendingUp,
-  TrendingDown,
-  Calendar,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  ChevronRight,
-  LogOut,
-  User,
-  Menu,
+  GripVertical,
+  ChevronUp,
+  Plus,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -70,731 +53,426 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
-// Sample data
-const clients = [
-  {
-    id: 1,
-    name: "Acme Corporation",
-    contact: "John Smith",
-    email: "john@acme.com",
-    retainerHours: 40,
-    usedHours: 28,
-    status: "active",
-  },
-  {
-    id: 2,
-    name: "TechStart Inc",
-    contact: "Sarah Johnson",
-    email: "sarah@techstart.io",
-    retainerHours: 20,
-    usedHours: 18,
-    status: "active",
-  },
-  {
-    id: 3,
-    name: "Global Media",
-    contact: "Mike Davis",
-    email: "mike@globalmedia.com",
-    retainerHours: 60,
-    usedHours: 45,
-    status: "active",
-  },
-  {
-    id: 4,
-    name: "Design Studio",
-    contact: "Emma Wilson",
-    email: "emma@designstudio.co",
-    retainerHours: 30,
-    usedHours: 30,
-    status: "exceeded",
-  },
-  {
-    id: 5,
-    name: "CloudSoft",
-    contact: "David Brown",
-    email: "david@cloudsoft.net",
-    retainerHours: 25,
-    usedHours: 10,
-    status: "active",
-  },
-];
-
-const recentActivity = [
-  {
-    id: 1,
-    action: "Project update submitted",
-    client: "Acme Corporation",
-    time: "2 hours ago",
-    type: "success",
-  },
-  {
-    id: 2,
-    action: "Hours limit warning",
-    client: "Design Studio",
-    time: "4 hours ago",
-    type: "warning",
-  },
-  {
-    id: 3,
-    action: "New retainer signed",
-    client: "CloudSoft",
-    time: "1 day ago",
-    type: "info",
-  },
-  {
-    id: 4,
-    action: "Invoice generated",
-    client: "TechStart Inc",
-    time: "2 days ago",
-    type: "default",
-  },
-];
-
-const tasks = [
-  {
-    id: 1,
-    title: "Review Q4 reports",
-    client: "Acme Corporation",
-    dueDate: "Today",
-    priority: "high",
-    completed: false,
-  },
-  {
-    id: 2,
-    title: "Update brand guidelines",
-    client: "Global Media",
-    dueDate: "Tomorrow",
-    priority: "medium",
-    completed: false,
-  },
-  {
-    id: 3,
-    title: "Send proposal draft",
-    client: "TechStart Inc",
-    dueDate: "Jan 10",
-    priority: "low",
-    completed: true,
-  },
-  {
-    id: 4,
-    title: "Schedule kickoff meeting",
-    client: "CloudSoft",
-    dueDate: "Jan 12",
-    priority: "medium",
-    completed: false,
-  },
-];
-
-const navItems = [
-  { icon: LayoutDashboard, label: "Dashboard", active: true },
-  { icon: Users, label: "Clients", active: false },
-  { icon: FileText, label: "Projects", active: false },
-  { icon: CreditCard, label: "Billing", active: false },
-  { icon: Settings, label: "Settings", active: false },
-];
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export default function Home() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [activeView, setActiveView] = useState<"create" | "design">("create");
+  const [activeDevice, setActiveDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
 
   return (
-    <div className="flex h-screen bg-background">
-      {/* Sidebar */}
-      <aside
-        className={`${
-          sidebarOpen ? "w-64" : "w-20"
-        } border-r bg-card transition-all duration-300 flex flex-col`}
-      >
-        {/* Logo */}
-        <div className="flex h-16 items-center gap-2 border-b px-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold">
-            T
+    <div className="flex h-screen flex-col bg-[#f3f4f6]">
+      {/* Top Navigation Bar */}
+      <header className="flex h-14 items-center justify-between border-b bg-white px-4">
+        {/* Left section */}
+        <div className="flex items-center gap-3">
+          {/* Logo */}
+          <div className="flex items-center gap-1.5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://framerusercontent.com/images/UFfWs8OKstTGqHK6sgAfYbb7zRo.png"
+              alt="Typeset"
+              className="h-7 w-7 rounded"
+            />
+            <Badge variant="pro" size="sm" className="h-4">
+              PRO
+            </Badge>
           </div>
-          {sidebarOpen && (
-            <span className="font-semibold text-lg">Typeset</span>
-          )}
-        </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 space-y-1 p-4">
-          {navItems.map((item) => (
-            <Tooltip key={item.label}>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={item.active ? "secondary" : "ghost"}
-                  className={`w-full ${
-                    sidebarOpen ? "justify-start" : "justify-center"
-                  }`}
-                >
-                  <item.icon className="h-5 w-5" />
-                  {sidebarOpen && <span className="ml-3">{item.label}</span>}
-                </Button>
-              </TooltipTrigger>
-              {!sidebarOpen && (
-                <TooltipContent side="right">{item.label}</TooltipContent>
-              )}
-            </Tooltip>
-          ))}
-        </nav>
-
-        {/* Sidebar Toggle */}
-        <div className="border-t p-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="w-full"
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Header */}
-        <header className="flex h-16 items-center justify-between border-b bg-card px-6">
-          <div className="flex items-center gap-4">
-            <h1 className="text-xl font-semibold">Dashboard</h1>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search..."
-                className="w-64 pl-10"
-              />
-            </div>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative">
-                  <Bell className="h-5 w-5" />
-                  <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-[10px] text-white">
-                    3
-                  </span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Notifications</TooltipContent>
-            </Tooltip>
+          {/* Combined: Book dropdown | Project Name | Cloud icon */}
+          <div className="flex items-center h-8 rounded-lg border bg-white shadow-sm overflow-hidden">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                </Button>
+                <button className="flex items-center justify-center h-full px-2.5 border-r hover:bg-secondary/50 transition-colors">
+                  <BookOpen className="h-4 w-4 text-muted-foreground" />
+                  <ChevronDown className="h-3 w-3 text-muted-foreground ml-0.5" />
+                </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>
-                  <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium">John Doe</p>
-                    <p className="text-xs text-muted-foreground">
-                      john@typeset.io
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <User className="mr-2 h-4 w-4" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Settings className="mr-2 h-4 w-4" />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Log out
-                </DropdownMenuItem>
+              <DropdownMenuContent align="start">
+                <DropdownMenuItem>Dashboard</DropdownMenuItem>
+                <DropdownMenuItem>Projects</DropdownMenuItem>
+                <DropdownMenuItem>Templates</DropdownMenuItem>
+                <DropdownMenuItem>Settings</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <span className="text-sm font-medium text-foreground px-3 border-r">Project Name</span>
+            <button className="flex items-center justify-center h-full px-2.5 hover:bg-secondary/50 transition-colors">
+              <Cloud className="h-4 w-4 text-muted-foreground" />
+            </button>
           </div>
-        </header>
+        </div>
 
-        {/* Main Dashboard Content */}
-        <main className="flex-1 overflow-auto p-6">
-          {/* Stats Cards */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Total Clients
-                </CardTitle>
-                <Users className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">12</div>
-                <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  <TrendingUp className="h-3 w-3 text-green-500" />
-                  <span className="text-green-500">+2</span> from last month
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Active Retainers
-                </CardTitle>
-                <FileText className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">8</div>
-                <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  <TrendingUp className="h-3 w-3 text-green-500" />
-                  <span className="text-green-500">+1</span> from last month
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Hours Used
-                </CardTitle>
-                <Clock className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">131 / 175</div>
-                <Progress value={75} className="h-2 mt-2" />
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Monthly Revenue
-                </CardTitle>
-                <CreditCard className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">$24,500</div>
-                <p className="text-xs text-muted-foreground flex items-center gap-1">
-                  <TrendingDown className="h-3 w-3 text-red-500" />
-                  <span className="text-red-500">-5%</span> from last month
-                </p>
-              </CardContent>
-            </Card>
+        {/* Center section - View Toggle - Single contained toggle group */}
+        <ToggleGroup
+          type="single"
+          variant="primary"
+          value={activeView}
+          onValueChange={(value) => value && setActiveView(value as "create" | "design")}
+        >
+          <ToggleGroupItem value="create" className="px-4 h-7 gap-2">
+            <Pencil className="h-4 w-4" />
+            Create
+          </ToggleGroupItem>
+          <ToggleGroupItem value="design" className="px-4 h-7 gap-2">
+            <Palette className="h-4 w-4" />
+            Design
+          </ToggleGroupItem>
+        </ToggleGroup>
+
+        {/* Right section */}
+        <div className="flex items-center gap-2">
+          {/* User Avatars Stack */}
+          <div className="flex -space-x-2">
+            <Avatar className="h-7 w-7 border-2 border-white">
+              <AvatarImage src="https://i.pravatar.cc/100?img=1" />
+              <AvatarFallback>U1</AvatarFallback>
+            </Avatar>
+            <Avatar className="h-7 w-7 border-2 border-white">
+              <AvatarImage src="https://i.pravatar.cc/100?img=2" />
+              <AvatarFallback>U2</AvatarFallback>
+            </Avatar>
+            <Avatar className="h-7 w-7 border-2 border-white">
+              <AvatarImage src="https://i.pravatar.cc/100?img=3" />
+              <AvatarFallback>U3</AvatarFallback>
+            </Avatar>
           </div>
 
-          {/* Main Content Tabs */}
-          <Tabs defaultValue="overview" className="space-y-4">
-            <div className="flex items-center justify-between">
-              <TabsList>
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="clients">Clients</TabsTrigger>
-                <TabsTrigger value="tasks">Tasks</TabsTrigger>
-              </TabsList>
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>
-                    <Plus className="mr-2 h-4 w-4" />
-                    New Client
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[500px]">
-                  <DialogHeader>
-                    <DialogTitle>Add New Client</DialogTitle>
-                    <DialogDescription>
-                      Fill in the details to add a new client retainer.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <div className="grid gap-2">
-                      <Label htmlFor="company">Company Name</Label>
-                      <Input id="company" placeholder="Enter company name" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="grid gap-2">
-                        <Label htmlFor="contact">Contact Person</Label>
-                        <Input id="contact" placeholder="Contact name" />
-                      </div>
-                      <div className="grid gap-2">
-                        <Label htmlFor="email">Email</Label>
-                        <Input id="email" type="email" placeholder="Email address" />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="grid gap-2">
-                        <Label htmlFor="hours">Retainer Hours</Label>
-                        <Select>
-                          <SelectTrigger id="hours">
-                            <SelectValue placeholder="Select hours" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="10">10 hours/month</SelectItem>
-                            <SelectItem value="20">20 hours/month</SelectItem>
-                            <SelectItem value="40">40 hours/month</SelectItem>
-                            <SelectItem value="60">60 hours/month</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="grid gap-2">
-                        <Label htmlFor="rate">Hourly Rate</Label>
-                        <Input id="rate" type="number" placeholder="$0" />
-                      </div>
-                    </div>
-                    <div className="grid gap-2">
-                      <Label htmlFor="notes">Notes</Label>
-                      <Textarea id="notes" placeholder="Additional notes..." />
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Switch id="auto-renew" />
-                      <Label htmlFor="auto-renew">Enable auto-renewal</Label>
-                    </div>
-                  </div>
-                  <DialogFooter>
-                    <Button variant="outline">Cancel</Button>
-                    <Button>Add Client</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
+          {/* Add User */}
+          <Button
+            variant="ghost"
+            className="h-6 w-6 rounded-full border-2 border-dashed border-primary text-primary p-0"
+          >
+            <Plus className="h-3 w-3" />
+          </Button>
+
+          {/* Notification */}
+          <Button variant="ghost" size="icon-xs" className="relative text-muted-foreground">
+            <div className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-primary" />
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+          </Button>
+
+          <Separator orientation="vertical" className="h-5" />
+
+          {/* Share */}
+          <Button variant="ghost" size="sm" className="gap-1.5 text-muted-foreground h-8">
+            <Share2 className="h-4 w-4" />
+            Share
+          </Button>
+
+          {/* Export */}
+          <Button variant="ghost" size="sm" className="gap-1.5 text-muted-foreground h-8">
+            <Download className="h-4 w-4" />
+            Export
+          </Button>
+
+          {/* Present Button */}
+          <Button size="sm" className="gap-1.5">
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Present
+            <ChevronDown className="h-3 w-3" />
+          </Button>
+        </div>
+      </header>
+
+      {/* Secondary Toolbar */}
+      <div className="flex h-11 items-center gap-0.5 border-b px-4 bg-white shadow-sm">
+        {/* Undo/Redo */}
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <Undo2 className="h-4 w-4" />
+        </Button>
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <Redo2 className="h-4 w-4" />
+        </Button>
+
+        <Separator orientation="vertical" className="h-5 mx-2" />
+
+        {/* Text Style Dropdown */}
+        <Select defaultValue="title">
+          <SelectTrigger className="w-20 h-7 border-0 bg-transparent text-xs gap-1">
+            <Type className="h-3.5 w-3.5 text-muted-foreground" />
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="title">Title</SelectItem>
+            <SelectItem value="heading">Heading</SelectItem>
+            <SelectItem value="body">Body</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Separator orientation="vertical" className="h-5 mx-2" />
+
+        {/* Formatting Buttons */}
+        <Button variant="secondary" size="icon-xs" className="bg-foreground text-white">
+          <Bold className="h-4 w-4" />
+        </Button>
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <Italic className="h-4 w-4" />
+        </Button>
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <Underline className="h-4 w-4" />
+        </Button>
+
+        <Separator orientation="vertical" className="h-5 mx-2" />
+
+        {/* List Buttons */}
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <List className="h-4 w-4" />
+        </Button>
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <ListOrdered className="h-4 w-4" />
+        </Button>
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <AlignLeft className="h-4 w-4" />
+        </Button>
+
+        <Separator orientation="vertical" className="h-5 mx-2" />
+
+        {/* Plus and Link */}
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <Plus className="h-4 w-4" />
+        </Button>
+        <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+          <Link className="h-4 w-4" />
+        </Button>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Left Panel - Content Editor */}
+        <div className="w-[440px] border-r bg-[#f8f9fa] p-4 overflow-auto">
+          {/* Content Block Card */}
+          <div className="bg-white rounded-lg border shadow-sm">
+            {/* Block Header */}
+            <div className="flex items-center justify-between p-3 border-b">
+              <div className="flex items-center gap-2">
+                <Badge variant="accent" className="h-8 px-3 flex items-center">
+                  Hero
+                </Badge>
+                <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+                  <Copy className="h-3.5 w-3.5" />
+                </Button>
+                <Button variant="ghost" size="icon-xs" className="text-muted-foreground">
+                  <Trash2 className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+              <Button
+                size="icon-sm"
+                className="rounded bg-[#8a38f5] text-white shadow-none hover:bg-[#7a2de5]"
+              >
+                <Sparkles className="h-4 w-4" />
+              </Button>
             </div>
 
-            <TabsContent value="overview" className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                {/* Recent Activity */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Recent Activity</CardTitle>
-                    <CardDescription>
-                      Latest updates across all clients
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {recentActivity.map((activity) => (
-                        <div
-                          key={activity.id}
-                          className="flex items-center gap-4"
-                        >
-                          <div
-                            className={`flex h-8 w-8 items-center justify-center rounded-full ${
-                              activity.type === "success"
-                                ? "bg-green-100 text-green-600"
-                                : activity.type === "warning"
-                                ? "bg-yellow-100 text-yellow-600"
-                                : activity.type === "info"
-                                ? "bg-blue-100 text-blue-600"
-                                : "bg-gray-100 text-gray-600"
-                            }`}
-                          >
-                            {activity.type === "success" ? (
-                              <CheckCircle className="h-4 w-4" />
-                            ) : activity.type === "warning" ? (
-                              <AlertCircle className="h-4 w-4" />
-                            ) : (
-                              <FileText className="h-4 w-4" />
-                            )}
-                          </div>
-                          <div className="flex-1 space-y-1">
-                            <p className="text-sm font-medium">
-                              {activity.action}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              {activity.client}
-                            </p>
-                          </div>
-                          <span className="text-xs text-muted-foreground">
-                            {activity.time}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Upcoming Tasks */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Upcoming Tasks</CardTitle>
-                    <CardDescription>
-                      Tasks that need your attention
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {tasks.map((task) => (
-                        <div
-                          key={task.id}
-                          className="flex items-center gap-4"
-                        >
-                          <Checkbox
-                            id={`task-${task.id}`}
-                            defaultChecked={task.completed}
-                          />
-                          <div className="flex-1 space-y-1">
-                            <label
-                              htmlFor={`task-${task.id}`}
-                              className={`text-sm font-medium cursor-pointer ${
-                                task.completed
-                                  ? "line-through text-muted-foreground"
-                                  : ""
-                              }`}
-                            >
-                              {task.title}
-                            </label>
-                            <p className="text-xs text-muted-foreground">
-                              {task.client}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <Badge
-                              variant={
-                                task.priority === "high"
-                                  ? "destructive"
-                                  : task.priority === "medium"
-                                  ? "warning"
-                                  : "secondary"
-                              }
-                            >
-                              {task.priority}
-                            </Badge>
-                            <span className="text-xs text-muted-foreground">
-                              {task.dueDate}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+            {/* Content Fields */}
+            <div className="p-4 space-y-3">
+              {/* Heading Field */}
+              <div className="flex items-start gap-3 p-3 rounded-md border bg-secondary/30">
+                <div className="flex items-center gap-2 shrink-0">
+                  <GripVertical className="h-4 w-4 text-muted-foreground/40 cursor-grab" />
+                  <div className="p-1 rounded bg-secondary">
+                    <Type className="h-3.5 w-3.5 text-muted-foreground" />
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <Input
+                    className="border-0 bg-transparent p-0 h-auto text-base font-semibold placeholder:text-muted-foreground focus-visible:ring-0"
+                    defaultValue="Unleash Your Team's Full Potential"
+                  />
+                </div>
+                <div className="flex items-center gap-0.5 shrink-0">
+                  <Button variant="ghost" className="h-5 w-5 p-0 text-muted-foreground">
+                    <ChevronUp className="h-3 w-3" />
+                  </Button>
+                  <Button variant="ghost" className="h-5 w-5 p-0 text-muted-foreground">
+                    <ChevronDown className="h-3 w-3" />
+                  </Button>
+                  <Button variant="ghost" className="h-5 w-5 p-0 text-muted-foreground">
+                    <MoreHorizontal className="h-3 w-3" />
+                  </Button>
+                </div>
               </div>
 
-              {/* FAQ Section */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Help</CardTitle>
-                  <CardDescription>
-                    Frequently asked questions
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>
-                        How do I add a new client retainer?
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        Click the &quot;New Client&quot; button at the top of the dashboard.
-                        Fill in the required information including company name,
-                        contact details, and retainer hours.
-                      </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-2">
-                      <AccordionTrigger>
-                        What happens when hours are exceeded?
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        When a client exceeds their retainer hours, they will be
-                        marked with an &quot;exceeded&quot; status. You can either bill
-                        for additional hours or roll them into the next month.
-                      </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-3">
-                      <AccordionTrigger>
-                        How do I generate invoices?
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        Go to the Billing section and select the client you want
-                        to invoice. You can generate monthly invoices
-                        automatically or create custom invoices.
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </CardContent>
-              </Card>
-            </TabsContent>
+              {/* Description Field */}
+              <div className="flex items-start gap-3 px-3">
+                <div className="p-1 rounded bg-secondary shrink-0 mt-0.5">
+                  <Type className="h-3.5 w-3.5 text-muted-foreground" />
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Streamline your workflow, boost productivity, and collaborate
+                  effortlessly with Taskly—your all-in-one project management solution.
+                </p>
+              </div>
 
-            <TabsContent value="clients" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Client Retainers</CardTitle>
-                  <CardDescription>
-                    Manage your client retainer agreements
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Client</TableHead>
-                        <TableHead>Contact</TableHead>
-                        <TableHead>Hours Used</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead className="w-[50px]"></TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {clients.map((client) => (
-                        <TableRow key={client.id}>
-                          <TableCell>
-                            <div className="flex items-center gap-3">
-                              <Avatar className="h-8 w-8">
-                                <AvatarFallback>
-                                  {client.name
-                                    .split(" ")
-                                    .map((n) => n[0])
-                                    .join("")}
-                                </AvatarFallback>
-                              </Avatar>
-                              <span className="font-medium">{client.name}</span>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div>
-                              <p className="text-sm">{client.contact}</p>
-                              <p className="text-xs text-muted-foreground">
-                                {client.email}
-                              </p>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <div className="space-y-1">
-                              <div className="flex justify-between text-sm">
-                                <span>
-                                  {client.usedHours} / {client.retainerHours} hrs
-                                </span>
-                                <span className="text-muted-foreground">
-                                  {Math.round(
-                                    (client.usedHours / client.retainerHours) *
-                                      100
-                                  )}
-                                  %
-                                </span>
-                              </div>
-                              <Progress
-                                value={
-                                  (client.usedHours / client.retainerHours) *
-                                  100
-                                }
-                                className="h-2"
-                              />
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge
-                              variant={
-                                client.status === "active"
-                                  ? "success"
-                                  : "destructive"
-                              }
-                            >
-                              {client.status === "active" ? "Active" : "Exceeded"}
-                            </Badge>
-                          </TableCell>
-                          <TableCell>
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon">
-                                  <MoreHorizontal className="h-4 w-4" />
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
-                                <DropdownMenuItem>View Details</DropdownMenuItem>
-                                <DropdownMenuItem>Log Hours</DropdownMenuItem>
-                                <DropdownMenuItem>Edit Retainer</DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem className="text-destructive">
-                                  End Retainer
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="tasks" className="space-y-4">
-              <Card>
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle>All Tasks</CardTitle>
-                      <CardDescription>
-                        Track and manage your project tasks
-                      </CardDescription>
-                    </div>
-                    <Button>
-                      <Plus className="mr-2 h-4 w-4" />
-                      Add Task
-                    </Button>
+              {/* CTA Button Field */}
+              <div className="flex items-center gap-3 px-3">
+                <div className="p-1 rounded bg-secondary shrink-0">
+                  <Link className="h-3.5 w-3.5 text-muted-foreground" />
+                </div>
+                <div className="flex items-center gap-2 flex-1">
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border bg-white">
+                    <Zap className="h-3.5 w-3.5 text-accent" />
+                    <span className="text-sm font-medium">Start Your Free Trial</span>
+                    <button className="h-4 w-4 text-muted-foreground hover:text-foreground">
+                      <X className="h-3 w-3" />
+                    </button>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {tasks.map((task) => (
-                      <div
-                        key={task.id}
-                        className="flex items-center gap-4 rounded-lg border p-4"
-                      >
-                        <Checkbox
-                          id={`all-task-${task.id}`}
-                          defaultChecked={task.completed}
-                        />
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2">
-                            <label
-                              htmlFor={`all-task-${task.id}`}
-                              className={`font-medium cursor-pointer ${
-                                task.completed
-                                  ? "line-through text-muted-foreground"
-                                  : ""
-                              }`}
-                            >
-                              {task.title}
-                            </label>
-                            <Badge
-                              variant={
-                                task.priority === "high"
-                                  ? "destructive"
-                                  : task.priority === "medium"
-                                  ? "warning"
-                                  : "secondary"
-                              }
-                            >
-                              {task.priority}
-                            </Badge>
-                          </div>
-                          <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground">
-                            <span className="flex items-center gap-1">
-                              <Users className="h-3 w-3" />
-                              {task.client}
-                            </span>
-                            <span className="flex items-center gap-1">
-                              <Calendar className="h-3 w-3" />
-                              {task.dueDate}
-                            </span>
-                          </div>
-                        </div>
-                        <Button variant="ghost" size="icon">
-                          <ChevronRight className="h-4 w-4" />
-                        </Button>
+                  <button className="h-6 w-6 rounded-full border-2 border-dashed border-accent text-accent flex items-center justify-center hover:bg-accent/10">
+                    <Plus className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Image Field */}
+              <div className="flex items-start gap-3 px-3">
+                <div className="p-1 rounded bg-secondary shrink-0">
+                  <ImageIcon className="h-3.5 w-3.5 text-muted-foreground" />
+                </div>
+                <div className="w-24 h-16 rounded-md overflow-hidden">
+                  <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <ImageIcon className="h-5 w-5 text-muted-foreground/40" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Panel - Live Preview */}
+        <div className="flex-1 bg-[#e5e7eb] flex flex-col">
+          {/* Preview Toolbar */}
+          <div className="flex items-center justify-center gap-3 px-4 py-2 bg-white border-b">
+            {/* Device Toggle */}
+            <ToggleGroup
+              type="single"
+              variant="contained"
+              size="icon"
+              value={activeDevice}
+              onValueChange={(value) => value && setActiveDevice(value as "desktop" | "tablet" | "mobile")}
+            >
+              <ToggleGroupItem value="desktop" aria-label="Desktop view">
+                <Monitor className="h-4 w-4" />
+              </ToggleGroupItem>
+              <ToggleGroupItem value="tablet" aria-label="Tablet view">
+                <Tablet className="h-4 w-4" />
+              </ToggleGroupItem>
+              <ToggleGroupItem value="mobile" aria-label="Mobile view">
+                <Smartphone className="h-4 w-4" />
+              </ToggleGroupItem>
+            </ToggleGroup>
+
+            {/* Width Indicator */}
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <Code className="h-3.5 w-3.5" />
+              <span>1400px</span>
+            </div>
+          </div>
+
+          {/* Preview Content */}
+          <div className="flex-1 p-6 overflow-auto">
+            <div className="bg-white rounded-xl shadow-lg border mx-auto max-w-4xl overflow-hidden">
+              {/* Website Header */}
+              <div className="flex items-center justify-between px-6 py-4 border-b">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-accent" />
+                  <span className="font-semibold text-sm">STRAFE CREATIVE</span>
+                </div>
+                <nav className="flex items-center gap-6 text-sm text-muted-foreground">
+                  <span>Products</span>
+                  <span>Resources</span>
+                  <span>Pricing</span>
+                </nav>
+                <Button size="sm" className="bg-primary text-white rounded-full px-4 text-xs">
+                  Call to action
+                </Button>
+              </div>
+
+              {/* Hero Section */}
+              <div className="px-12 py-16 text-center">
+                <h1 className="text-4xl font-bold mb-4">
+                  Unleash Your Team&apos;s
+                  <br />
+                  <span className="text-primary">Full Potential</span>
+                </h1>
+                <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+                  Streamline your workflow, boost productivity, and collaborate effortlessly
+                  with Taskly—your all-in-one project management solution.
+                </p>
+                <div className="flex items-center justify-center gap-3">
+                  <Button className="bg-primary text-white rounded-full px-6">
+                    Start Your Free Trial
+                  </Button>
+                  <Button variant="outline" className="rounded-full px-6">
+                    Watch Demo
+                  </Button>
+                </div>
+              </div>
+
+              {/* Hero Image */}
+              <div className="px-12 pb-12">
+                <div className="rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 h-64 flex items-center justify-center border">
+                  <div className="flex gap-8">
+                    <div className="w-32 h-40 bg-white rounded-lg shadow-md" />
+                    <div className="w-48 h-40 bg-white rounded-lg shadow-md" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Company Logos */}
+              <div className="bg-secondary/30 py-6 px-12">
+                <p className="text-xs text-center text-muted-foreground mb-4">Trusted by these companies</p>
+                <div className="flex items-center justify-center gap-8 text-muted-foreground text-sm">
+                  <span className="flex items-center gap-1"><span className="text-lg">●</span> Boltshift</span>
+                  <span className="flex items-center gap-1"><span className="text-lg">◐</span> Lightbox</span>
+                  <span className="flex items-center gap-1"><span className="text-lg">◆</span> FeatherDev</span>
+                  <span className="flex items-center gap-1"><span className="text-lg">✦</span> Spherule</span>
+                  <span className="flex items-center gap-1"><span className="text-lg">◎</span> GlobalBank</span>
+                </div>
+              </div>
+
+              {/* Features Section */}
+              <div className="px-12 py-12">
+                <h2 className="text-2xl font-bold text-center mb-8">Our Features</h2>
+                <div className="grid grid-cols-3 gap-6">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="rounded-xl overflow-hidden border">
+                      <div className="h-32 bg-gradient-to-br from-gray-100 to-gray-200" />
+                      <div className="p-4">
+                        <h3 className="font-semibold text-sm mb-1">UX review presentations</h3>
+                        <p className="text-xs text-muted-foreground">
+                          How do you create compelling presentations that wow your colleagues and impress your managers?
+                        </p>
                       </div>
-                    ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Far Right Panel - Thumbnails (Dark) */}
+        <div className="w-48 bg-slate-900 p-3 overflow-auto">
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className={`rounded-lg overflow-hidden border-2 ${
+                  i === 1 ? "border-primary" : "border-transparent"
+                }`}
+              >
+                <div className="bg-white p-2 h-28">
+                  <div className="h-full rounded bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-[8px] text-muted-foreground">
+                    Page {i}
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </main>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

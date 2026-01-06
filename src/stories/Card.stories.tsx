@@ -18,6 +18,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Sparkles, Layout, Image, Type, Grid3X3 } from "lucide-react";
 
 const meta: Meta<typeof Card> = {
   title: "UI/Card",
@@ -113,7 +115,7 @@ export const Notification: Story = {
           ].map((notification, index) => (
             <div
               key={index}
-              className="flex items-center space-x-4 rounded-md p-2 transition-colors hover:bg-accent"
+              className="flex items-center space-x-4 rounded-md p-2 transition-colors hover:bg-secondary"
             >
               <span className="flex h-2 w-2 rounded-full bg-primary" />
               <div className="flex-1 space-y-1">
@@ -173,5 +175,144 @@ export const Stats: Story = {
         </CardContent>
       </Card>
     </div>
+  ),
+};
+
+export const TypesetFeatureCards: Story = {
+  name: "Typeset Feature Cards",
+  render: () => (
+    <div className="grid gap-4 md:grid-cols-3">
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary mb-2">
+            <Sparkles className="h-5 w-5" />
+          </div>
+          <CardTitle className="text-base">AI-Powered</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            Generate layouts and content instantly with our AI tools.
+          </p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent mb-2">
+            <Layout className="h-5 w-5" />
+          </div>
+          <CardTitle className="text-base">Responsive</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            Create designs that work perfectly on all devices.
+          </p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader className="pb-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success/10 text-success mb-2">
+            <Grid3X3 className="h-5 w-5" />
+          </div>
+          <CardTitle className="text-base">Fast</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            Optimized for speed and performance.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  ),
+};
+
+export const TypesetProjectCard: Story = {
+  name: "Typeset Project Card",
+  render: () => (
+    <Card className="w-[300px] overflow-hidden">
+      <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/20" />
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-base">Marketing Website</CardTitle>
+          <Badge variant="muted">12 pages</Badge>
+        </div>
+        <CardDescription>Last edited 2 hours ago</CardDescription>
+      </CardHeader>
+      <CardFooter className="gap-2">
+        <Button size="sm" className="flex-1">
+          Open
+        </Button>
+        <Button size="sm" variant="outline">
+          Settings
+        </Button>
+      </CardFooter>
+    </Card>
+  ),
+};
+
+export const TypesetSidebarCard: Story = {
+  name: "Typeset Sidebar Panel",
+  render: () => (
+    <Card className="w-[280px]">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          Spacing
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div>
+          <div className="flex justify-between text-sm mb-2">
+            <span>Padding</span>
+            <span className="text-muted-foreground">20px</span>
+          </div>
+          <Progress value={40} className="h-2" />
+        </div>
+        <div>
+          <div className="flex justify-between text-sm mb-2">
+            <span>Margin</span>
+            <span className="text-muted-foreground">16px</span>
+          </div>
+          <Progress value={32} variant="info" className="h-2" />
+        </div>
+        <div>
+          <div className="flex justify-between text-sm mb-2">
+            <span>Gap</span>
+            <span className="text-muted-foreground">12px</span>
+          </div>
+          <Progress value={24} variant="success" className="h-2" />
+        </div>
+      </CardContent>
+    </Card>
+  ),
+};
+
+export const TypesetLayoutPresets: Story = {
+  name: "Typeset Layout Presets",
+  render: () => (
+    <Card className="w-[280px]">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
+          Layout Presets
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { name: "Hero Section", icon: Layout },
+            { name: "Feature Grid", icon: Grid3X3 },
+            { name: "Text Block", icon: Type },
+            { name: "Image Gallery", icon: Image },
+          ].map((preset) => (
+            <Button
+              key={preset.name}
+              variant="outline"
+              className="h-auto py-3 flex-col gap-2"
+            >
+              <preset.icon className="h-5 w-5" />
+              <span className="text-xs">{preset.name}</span>
+            </Button>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   ),
 };

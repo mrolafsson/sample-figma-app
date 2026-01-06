@@ -1,14 +1,15 @@
 import type { NextConfig } from "next";
 
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig: NextConfig = {
   output: "export",
   images: {
     unoptimized: true,
   },
-  // For GitHub Pages deployment
-  // basePath and assetPrefix will be set via environment variables
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || "",
+  // For GitHub Pages deployment at mrolafsson.github.io/sample-figma-app/
+  basePath: isProd ? "/sample-figma-app" : "",
+  assetPrefix: isProd ? "/sample-figma-app" : "",
 };
 
 export default nextConfig;
