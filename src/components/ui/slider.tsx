@@ -4,6 +4,35 @@ import * as React from "react"
 import * as SliderPrimitive from "@radix-ui/react-slider"
 import { cn } from "@/lib/utils"
 
+/**
+ * A draggable slider component for selecting numeric values within a range.
+ *
+ * @description
+ * The Slider component allows users to select a value from a continuous or discrete range
+ * by dragging a thumb along a track. Built on Radix UI Slider primitive for accessibility.
+ *
+ * @example
+ * ```tsx
+ * // Basic slider
+ * <Slider defaultValue={[50]} max={100} step={1} />
+ *
+ * // Controlled slider
+ * const [value, setValue] = useState([33])
+ * <Slider value={value} onValueChange={setValue} />
+ *
+ * // With min/max and step
+ * <Slider defaultValue={[25]} min={0} max={100} step={5} />
+ *
+ * // Range slider (two thumbs)
+ * <Slider defaultValue={[25, 75]} max={100} />
+ *
+ * // Disabled
+ * <Slider defaultValue={[50]} disabled />
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/slider} shadcn/ui Slider documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/slider} Radix UI Slider documentation
+ */
 const Slider = React.forwardRef<
   React.ElementRef<typeof SliderPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>

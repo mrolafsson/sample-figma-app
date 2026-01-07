@@ -5,14 +5,61 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+/**
+ * A modal dialog component for displaying content that requires user attention.
+ *
+ * @description
+ * The Dialog component creates an accessible modal overlay that interrupts the user's
+ * workflow to display important content. Built on Radix UI Dialog primitive for full
+ * accessibility support including focus management, escape key handling, and screen reader
+ * announcements.
+ *
+ * ## Sub-components
+ * - `Dialog` - Root wrapper managing open/closed state
+ * - `DialogTrigger` - Button that opens the dialog
+ * - `DialogContent` - The modal container
+ * - `DialogHeader` - Header section for title and description
+ * - `DialogTitle` - Accessible dialog title
+ * - `DialogDescription` - Supporting description text
+ * - `DialogFooter` - Footer section for actions
+ * - `DialogClose` - Close button component
+ *
+ * @example
+ * ```tsx
+ * <Dialog>
+ *   <DialogTrigger asChild>
+ *     <Button>Open Dialog</Button>
+ *   </DialogTrigger>
+ *   <DialogContent>
+ *     <DialogHeader>
+ *       <DialogTitle>Are you sure?</DialogTitle>
+ *       <DialogDescription>
+ *         This action cannot be undone.
+ *       </DialogDescription>
+ *     </DialogHeader>
+ *     <DialogFooter>
+ *       <Button variant="outline">Cancel</Button>
+ *       <Button>Confirm</Button>
+ *     </DialogFooter>
+ *   </DialogContent>
+ * </Dialog>
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/dialog} shadcn/ui Dialog documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/dialog} Radix UI Dialog documentation
+ */
 const Dialog = DialogPrimitive.Root
 
+/** Button or element that opens the dialog when clicked. */
 const DialogTrigger = DialogPrimitive.Trigger
 
+/** Portal container for rendering the dialog outside the DOM hierarchy. */
 const DialogPortal = DialogPrimitive.Portal
 
+/** Button for closing the dialog. */
 const DialogClose = DialogPrimitive.Close
 
+/** Semi-transparent backdrop overlay behind the dialog. */
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -28,6 +75,10 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
+/**
+ * Main content container for the dialog.
+ * Includes automatic overlay, close button, and animation.
+ */
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
@@ -52,6 +103,10 @@ const DialogContent = React.forwardRef<
 ))
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
+/**
+ * Header section of the dialog, typically contains DialogTitle and DialogDescription.
+ * Centers text on mobile and left-aligns on larger screens.
+ */
 const DialogHeader = ({
   className,
   ...props
@@ -66,6 +121,10 @@ const DialogHeader = ({
 )
 DialogHeader.displayName = "DialogHeader"
 
+/**
+ * Footer section of the dialog for action buttons.
+ * Stacks buttons vertically on mobile, horizontally on larger screens.
+ */
 const DialogFooter = ({
   className,
   ...props
@@ -80,6 +139,10 @@ const DialogFooter = ({
 )
 DialogFooter.displayName = "DialogFooter"
 
+/**
+ * Accessible title for the dialog.
+ * Required for screen readers to announce the dialog purpose.
+ */
 const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -95,6 +158,10 @@ const DialogTitle = React.forwardRef<
 ))
 DialogTitle.displayName = DialogPrimitive.Title.displayName
 
+/**
+ * Accessible description for the dialog.
+ * Provides additional context announced by screen readers.
+ */
 const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>

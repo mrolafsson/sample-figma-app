@@ -1,11 +1,45 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "@/components/ui/badge";
 
+/**
+ * The Badge component displays labels for status, categories, or counts.
+ *
+ * ## Features
+ * - **10 color variants** for different semantic meanings
+ * - **4 size options** including pill style
+ * - **Inline element** - Works in text flow
+ *
+ * ## Variant Guidelines
+ * | Variant | Use Case |
+ * |---------|----------|
+ * | `default` | Primary/new items |
+ * | `secondary` | Neutral labels |
+ * | `destructive` | Errors, archived |
+ * | `success` | Active, published |
+ * | `warning` | Pending, review |
+ * | `info` | In progress |
+ * | `muted` | Draft, disabled |
+ * | `outline` | Subtle labeling |
+ * | `pro` | Premium features |
+ * | `accent` | Highlighted sections |
+ */
 const meta: Meta<typeof Badge> = {
   title: "UI/Badge",
   component: Badge,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `A small label component for displaying status, categories, or counts.
+
+\`\`\`tsx
+import { Badge } from "@/components/ui/badge"
+
+<Badge variant="success">Active</Badge>
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
@@ -13,11 +47,17 @@ const meta: Meta<typeof Badge> = {
       control: "select",
       options: ["default", "secondary", "destructive", "outline", "success", "warning", "info", "muted", "pro", "accent"],
       description: "The visual style variant of the badge",
+      table: {
+        defaultValue: { summary: "default" },
+      },
     },
     size: {
       control: "select",
       options: ["default", "sm", "lg", "pill"],
-      description: "The size of the badge",
+      description: "The size of the badge. Use `pill` for rounded ends.",
+      table: {
+        defaultValue: { summary: "default" },
+      },
     },
   },
 };

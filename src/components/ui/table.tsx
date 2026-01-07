@@ -1,6 +1,46 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
+/**
+ * A responsive table component for displaying structured data.
+ *
+ * @description
+ * The Table component provides a set of composable sub-components for building
+ * data tables. Includes horizontal scroll support for responsive layouts.
+ *
+ * ## Sub-components
+ * - `Table` - Root table element with overflow wrapper
+ * - `TableHeader` - Header section (`<thead>`)
+ * - `TableBody` - Body section (`<tbody>`)
+ * - `TableFooter` - Footer section (`<tfoot>`)
+ * - `TableRow` - Table row (`<tr>`)
+ * - `TableHead` - Header cell (`<th>`)
+ * - `TableCell` - Data cell (`<td>`)
+ * - `TableCaption` - Table caption
+ *
+ * @example
+ * ```tsx
+ * <Table>
+ *   <TableCaption>A list of your recent invoices.</TableCaption>
+ *   <TableHeader>
+ *     <TableRow>
+ *       <TableHead>Invoice</TableHead>
+ *       <TableHead>Status</TableHead>
+ *       <TableHead className="text-right">Amount</TableHead>
+ *     </TableRow>
+ *   </TableHeader>
+ *   <TableBody>
+ *     <TableRow>
+ *       <TableCell>INV001</TableCell>
+ *       <TableCell>Paid</TableCell>
+ *       <TableCell className="text-right">$250.00</TableCell>
+ *     </TableRow>
+ *   </TableBody>
+ * </Table>
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/table} shadcn/ui Table documentation
+ */
 const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
@@ -15,6 +55,7 @@ const Table = React.forwardRef<
 ))
 Table.displayName = "Table"
 
+/** Table header section containing column headings. */
 const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
@@ -23,6 +64,7 @@ const TableHeader = React.forwardRef<
 ))
 TableHeader.displayName = "TableHeader"
 
+/** Table body section containing data rows. */
 const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
@@ -35,6 +77,7 @@ const TableBody = React.forwardRef<
 ))
 TableBody.displayName = "TableBody"
 
+/** Table footer section for totals or summary rows. */
 const TableFooter = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
@@ -50,6 +93,7 @@ const TableFooter = React.forwardRef<
 ))
 TableFooter.displayName = "TableFooter"
 
+/** Table row with hover state and optional selection styling. */
 const TableRow = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
@@ -65,6 +109,7 @@ const TableRow = React.forwardRef<
 ))
 TableRow.displayName = "TableRow"
 
+/** Table header cell with muted text styling. */
 const TableHead = React.forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement>
@@ -80,6 +125,7 @@ const TableHead = React.forwardRef<
 ))
 TableHead.displayName = "TableHead"
 
+/** Table data cell for content display. */
 const TableCell = React.forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement>
@@ -92,6 +138,7 @@ const TableCell = React.forwardRef<
 ))
 TableCell.displayName = "TableCell"
 
+/** Accessible caption for describing the table contents. */
 const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,
   React.HTMLAttributes<HTMLTableCaptionElement>

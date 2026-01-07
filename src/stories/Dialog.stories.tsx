@@ -12,11 +12,63 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+/**
+ * The Dialog component creates an accessible modal overlay.
+ *
+ * ## Features
+ * - **Focus trapping** - Keyboard focus stays within dialog
+ * - **Escape to close** - Press Escape to dismiss
+ * - **Click outside** - Click overlay to close
+ * - **Screen reader support** - Proper ARIA attributes
+ * - **Animated** - Smooth open/close transitions
+ *
+ * ## Sub-components
+ * | Component | Purpose |
+ * |-----------|---------|
+ * | `Dialog` | Root state wrapper |
+ * | `DialogTrigger` | Opens the dialog |
+ * | `DialogContent` | Modal container |
+ * | `DialogHeader` | Title/description area |
+ * | `DialogTitle` | Accessible title |
+ * | `DialogDescription` | Supporting text |
+ * | `DialogFooter` | Action buttons |
+ * | `DialogClose` | Close button |
+ *
+ * ## Best Practices
+ * - Always include a DialogTitle for accessibility
+ * - Use DialogDescription for context
+ * - Place primary action on the right in footer
+ */
 const meta: Meta<typeof Dialog> = {
   title: "UI/Dialog",
   component: Dialog,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `A modal dialog for displaying content that requires user attention.
+
+\`\`\`tsx
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"
+
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Title</DialogTitle>
+      <DialogDescription>Description</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ["autodocs"],
 };

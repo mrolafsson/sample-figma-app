@@ -5,6 +5,41 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { Circle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+/**
+ * A set of mutually exclusive options where only one can be selected.
+ *
+ * @description
+ * The RadioGroup component allows users to select exactly one option from a set.
+ * Built on Radix UI RadioGroup primitive for accessibility support including
+ * keyboard navigation and ARIA attributes.
+ *
+ * ## Sub-components
+ * - `RadioGroup` - Root container managing selection state
+ * - `RadioGroupItem` - Individual radio option
+ *
+ * @example
+ * ```tsx
+ * <RadioGroup defaultValue="option-1">
+ *   <div className="flex items-center space-x-2">
+ *     <RadioGroupItem value="option-1" id="option-1" />
+ *     <Label htmlFor="option-1">Option 1</Label>
+ *   </div>
+ *   <div className="flex items-center space-x-2">
+ *     <RadioGroupItem value="option-2" id="option-2" />
+ *     <Label htmlFor="option-2">Option 2</Label>
+ *   </div>
+ * </RadioGroup>
+ *
+ * // Controlled
+ * const [value, setValue] = useState("option-1")
+ * <RadioGroup value={value} onValueChange={setValue}>
+ *   ...
+ * </RadioGroup>
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/radio-group} shadcn/ui RadioGroup documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/radio-group} Radix UI RadioGroup documentation
+ */
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
@@ -19,6 +54,10 @@ const RadioGroup = React.forwardRef<
 })
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 
+/**
+ * Individual radio button within a RadioGroup.
+ * Shows a filled circle indicator when selected.
+ */
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>

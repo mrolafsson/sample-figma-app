@@ -4,8 +4,45 @@ import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 import { cn } from "@/lib/utils"
 
+/**
+ * A tabbed interface component for organizing content into panels.
+ *
+ * @description
+ * The Tabs component allows users to switch between different views or content sections
+ * within the same context. Built on Radix UI Tabs primitive for accessibility support
+ * including keyboard navigation and ARIA attributes.
+ *
+ * ## Sub-components
+ * - `Tabs` - Root wrapper managing active tab state
+ * - `TabsList` - Container for tab triggers
+ * - `TabsTrigger` - Clickable tab button
+ * - `TabsContent` - Panel content for each tab
+ *
+ * @example
+ * ```tsx
+ * <Tabs defaultValue="account">
+ *   <TabsList>
+ *     <TabsTrigger value="account">Account</TabsTrigger>
+ *     <TabsTrigger value="password">Password</TabsTrigger>
+ *   </TabsList>
+ *   <TabsContent value="account">
+ *     Account settings content here.
+ *   </TabsContent>
+ *   <TabsContent value="password">
+ *     Password settings content here.
+ *   </TabsContent>
+ * </Tabs>
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/tabs} shadcn/ui Tabs documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/tabs} Radix UI Tabs documentation
+ */
 const Tabs = TabsPrimitive.Root
 
+/**
+ * Container for tab triggers with pill-style background.
+ * Handles horizontal layout and visual grouping of tab buttons.
+ */
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
@@ -21,6 +58,10 @@ const TabsList = React.forwardRef<
 ))
 TabsList.displayName = TabsPrimitive.List.displayName
 
+/**
+ * Clickable tab button that switches to its associated content panel.
+ * Shows active state styling when selected.
+ */
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
@@ -36,6 +77,10 @@ const TabsTrigger = React.forwardRef<
 ))
 TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
 
+/**
+ * Content panel displayed when its associated tab is active.
+ * Hidden when tab is not selected.
+ */
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>

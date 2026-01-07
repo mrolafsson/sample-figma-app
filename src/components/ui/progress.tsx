@@ -5,6 +5,16 @@ import * as ProgressPrimitive from "@radix-ui/react-progress"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
+/**
+ * Progress bar variant styles.
+ *
+ * **Variants:**
+ * - `default` - Primary brand color
+ * - `success` - Green for successful/complete states
+ * - `warning` - Yellow for cautionary states
+ * - `destructive` - Red for error states
+ * - `info` - Blue for informational states
+ */
 const progressVariants = cva(
   "h-full w-full flex-1 transition-all",
   {
@@ -23,10 +33,38 @@ const progressVariants = cva(
   }
 )
 
+/**
+ * Props for the Progress component.
+ */
 export interface ProgressProps
   extends React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
     VariantProps<typeof progressVariants> {}
 
+/**
+ * A horizontal progress bar component for displaying completion status.
+ *
+ * @description
+ * The Progress component visually indicates the completion percentage of a task
+ * or process. Built on Radix UI Progress primitive for accessibility.
+ *
+ * @example
+ * ```tsx
+ * // Basic progress
+ * <Progress value={33} />
+ *
+ * // With variant
+ * <Progress value={75} variant="success" />
+ *
+ * // Loading state (indeterminate)
+ * <Progress value={null} />
+ *
+ * // Full width with custom height
+ * <Progress value={50} className="h-4" />
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/progress} shadcn/ui Progress documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/progress} Radix UI Progress documentation
+ */
 const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   ProgressProps

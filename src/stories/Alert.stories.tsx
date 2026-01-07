@@ -2,17 +2,59 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle, CheckCircle, Info, AlertTriangle } from "lucide-react";
 
+/**
+ * The Alert component displays important messages to users.
+ *
+ * ## Features
+ * - **5 semantic variants** for different message types
+ * - **Icon support** - Icons automatically positioned left
+ * - **Accessible** - Uses `role="alert"` for screen readers
+ *
+ * ## Variant Guidelines
+ * | Variant | Use Case |
+ * |---------|----------|
+ * | `default` | General information |
+ * | `destructive` | Errors, critical issues |
+ * | `success` | Positive feedback |
+ * | `warning` | Cautionary messages |
+ * | `info` | Helpful tips |
+ *
+ * ## Best Practices
+ * - Always include a title for clarity
+ * - Use icons to reinforce the message type
+ * - Keep descriptions concise and actionable
+ */
 const meta: Meta<typeof Alert> = {
   title: "UI/Alert",
   component: Alert,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `A callout component for displaying important messages.
+
+\`\`\`tsx
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+
+<Alert variant="success">
+  <CheckCircle className="h-4 w-4" />
+  <AlertTitle>Success</AlertTitle>
+  <AlertDescription>Your changes have been saved.</AlertDescription>
+</Alert>
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",
       options: ["default", "destructive", "success", "warning", "info"],
+      description: "The semantic variant of the alert",
+      table: {
+        defaultValue: { summary: "default" },
+      },
     },
   },
 };

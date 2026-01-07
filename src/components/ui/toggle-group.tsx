@@ -6,6 +6,15 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Toggle group container variant styles.
+ *
+ * **Variants:**
+ * - `default` - Rounded container with secondary background
+ * - `primary` - Same as default (for semantic consistency)
+ * - `outline` - Bordered container
+ * - `contained` - Compact variant with smaller padding
+ */
 const toggleGroupVariants = cva(
   "inline-flex items-center justify-center",
   {
@@ -51,6 +60,7 @@ const toggleGroupItemVariants = cva(
   }
 )
 
+/** Context for passing variant and size to child items. */
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleGroupItemVariants>
 >({
@@ -58,6 +68,49 @@ const ToggleGroupContext = React.createContext<
   size: "default",
 })
 
+/**
+ * A group of toggle buttons where one or multiple can be selected.
+ *
+ * @description
+ * The ToggleGroup component creates a set of related toggle buttons that work
+ * together. Supports single selection (like radio buttons) or multiple selection.
+ * Built on Radix UI ToggleGroup primitive for accessibility.
+ *
+ * ## Sub-components
+ * - `ToggleGroup` - Root container managing selection state
+ * - `ToggleGroupItem` - Individual toggle button
+ *
+ * @example
+ * ```tsx
+ * // Single selection
+ * <ToggleGroup type="single" defaultValue="center">
+ *   <ToggleGroupItem value="left">
+ *     <AlignLeft className="h-4 w-4" />
+ *   </ToggleGroupItem>
+ *   <ToggleGroupItem value="center">
+ *     <AlignCenter className="h-4 w-4" />
+ *   </ToggleGroupItem>
+ *   <ToggleGroupItem value="right">
+ *     <AlignRight className="h-4 w-4" />
+ *   </ToggleGroupItem>
+ * </ToggleGroup>
+ *
+ * // Multiple selection
+ * <ToggleGroup type="multiple">
+ *   <ToggleGroupItem value="bold">B</ToggleGroupItem>
+ *   <ToggleGroupItem value="italic">I</ToggleGroupItem>
+ *   <ToggleGroupItem value="underline">U</ToggleGroupItem>
+ * </ToggleGroup>
+ *
+ * // With variant
+ * <ToggleGroup type="single" variant="outline">
+ *   ...
+ * </ToggleGroup>
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/toggle-group} shadcn/ui ToggleGroup documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/toggle-group} Radix UI ToggleGroup documentation
+ */
 const ToggleGroup = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
@@ -77,6 +130,10 @@ const ToggleGroup = React.forwardRef<
 
 ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName
 
+/**
+ * Individual toggle button within a ToggleGroup.
+ * Inherits variant and size from parent group by default.
+ */
 const ToggleGroupItem = React.forwardRef<
   React.ElementRef<typeof ToggleGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &

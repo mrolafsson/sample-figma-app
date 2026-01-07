@@ -4,6 +4,39 @@ import * as React from "react"
 import * as SwitchPrimitives from "@radix-ui/react-switch"
 import { cn } from "@/lib/utils"
 
+/**
+ * A toggle switch component for binary on/off states.
+ *
+ * @description
+ * The Switch component is a visually distinct toggle control for settings that have
+ * an immediate effect. Use switches for features that can be turned on or off.
+ * Built on Radix UI Switch primitive for accessibility.
+ *
+ * @example
+ * ```tsx
+ * // Basic switch
+ * <Switch />
+ *
+ * // With label
+ * <div className="flex items-center space-x-2">
+ *   <Switch id="airplane-mode" />
+ *   <Label htmlFor="airplane-mode">Airplane Mode</Label>
+ * </div>
+ *
+ * // Controlled
+ * const [enabled, setEnabled] = useState(false)
+ * <Switch checked={enabled} onCheckedChange={setEnabled} />
+ *
+ * // Default checked
+ * <Switch defaultChecked />
+ *
+ * // Disabled
+ * <Switch disabled />
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/switch} shadcn/ui Switch documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/switch} Radix UI Switch documentation
+ */
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>

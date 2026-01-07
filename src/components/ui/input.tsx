@@ -1,11 +1,63 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
+/**
+ * Props for the Input component.
+ *
+ * @extends React.InputHTMLAttributes<HTMLInputElement>
+ */
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * When true, applies error styling to the input (red border and focus ring).
+   * Use this to indicate validation errors.
+   *
+   * @default false
+   * @example
+   * ```tsx
+   * <Input error placeholder="Invalid input" />
+   * ```
+   */
   error?: boolean
 }
 
+/**
+ * A styled text input component for forms and user input.
+ *
+ * @description
+ * The Input component is a flexible text input that supports all native input types.
+ * It includes built-in styling for focus states, disabled states, and error states.
+ * Works seamlessly with form libraries and native form validation.
+ *
+ * @example
+ * ```tsx
+ * // Basic text input
+ * <Input placeholder="Enter your name" />
+ *
+ * // Email input
+ * <Input type="email" placeholder="Enter your email" />
+ *
+ * // Password input
+ * <Input type="password" placeholder="Enter password" />
+ *
+ * // With error state
+ * <Input error placeholder="Invalid input" />
+ *
+ * // With label
+ * <div className="grid gap-1.5">
+ *   <Label htmlFor="email">Email</Label>
+ *   <Input type="email" id="email" placeholder="Email" />
+ * </div>
+ *
+ * // Disabled state
+ * <Input disabled placeholder="Cannot edit" />
+ *
+ * // File input
+ * <Input type="file" />
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/input} shadcn/ui Input documentation
+ */
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error, ...props }, ref) => {
     return (

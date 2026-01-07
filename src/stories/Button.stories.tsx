@@ -2,27 +2,98 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "@/components/ui/button";
 import { Mail, Loader2, ChevronRight, Sparkles, Download, Share2, Pencil, Palette, Play, ChevronDown, Bold } from "lucide-react";
 
+/**
+ * The Button component is the primary interactive element for triggering actions in your application.
+ *
+ * ## Features
+ * - **9 visual variants** for different use cases (primary, secondary, destructive, etc.)
+ * - **8 size options** including specialized icon button sizes
+ * - **Polymorphic rendering** via the `asChild` prop to render as links or other elements
+ * - **Built-in accessibility** with focus states and keyboard navigation
+ * - **Icon support** with automatic sizing and spacing
+ *
+ * ## Usage Guidelines
+ *
+ * ### Variant Selection
+ * | Variant | Use Case |
+ * |---------|----------|
+ * | `default` | Primary actions (Submit, Save, Create) |
+ * | `secondary` | Secondary actions (Cancel, Back) |
+ * | `destructive` | Dangerous actions (Delete, Remove) |
+ * | `warning` | Cautionary actions (Override, Force) |
+ * | `success` | Confirmation actions (Confirm, Approve) |
+ * | `outline` | Alternative to secondary with border |
+ * | `ghost` | Minimal UI, toolbars, icon buttons |
+ * | `link` | Navigation that looks like a link |
+ * | `accent` | Highlighted/featured actions |
+ *
+ * ### Size Selection
+ * | Size | Dimensions | Use Case |
+ * |------|------------|----------|
+ * | `sm` | h-8 | Compact UIs, tables |
+ * | `default` | h-9 | Standard buttons |
+ * | `lg` | h-10 | Prominent CTAs |
+ * | `xl` | h-11 | Hero sections |
+ * | `icon-xs` | 28x28 | Tight toolbars |
+ * | `icon-sm` | 32x32 | Inline actions |
+ * | `icon` | 36x36 | Standard icon buttons |
+ * | `icon-lg` | 40x40 | Prominent icon actions |
+ */
 const meta: Meta<typeof Button> = {
   title: "UI/Button",
   component: Button,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `A versatile button component with multiple variants and sizes.
+
+Built on top of native HTML button with Radix UI Slot for polymorphic rendering.
+
+\`\`\`tsx
+import { Button } from "@/components/ui/button"
+
+<Button variant="default" size="default">
+  Click me
+</Button>
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",
       options: ["default", "destructive", "warning", "success", "outline", "secondary", "ghost", "link", "accent"],
-      description: "The visual style variant of the button",
+      description: "The visual style variant of the button. Use `default` for primary actions, `destructive` for dangerous actions, `ghost` for minimal UI.",
+      table: {
+        defaultValue: { summary: "default" },
+        type: { summary: "string" },
+      },
     },
     size: {
       control: "select",
       options: ["default", "sm", "lg", "xl", "icon", "icon-sm", "icon-xs", "icon-lg"],
-      description: "The size of the button",
+      description: "The size of the button. Use `icon-*` sizes for icon-only buttons.",
+      table: {
+        defaultValue: { summary: "default" },
+        type: { summary: "string" },
+      },
     },
     disabled: {
       control: "boolean",
-      description: "Whether the button is disabled",
+      description: "When true, the button will be non-interactive and visually muted.",
+      table: {
+        defaultValue: { summary: "false" },
+      },
+    },
+    asChild: {
+      control: "boolean",
+      description: "When true, renders the child element as the button root. Useful for rendering as `<a>` tags.",
+      table: {
+        defaultValue: { summary: "false" },
+      },
     },
   },
 };

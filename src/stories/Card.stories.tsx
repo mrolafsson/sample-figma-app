@@ -21,11 +21,55 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Sparkles, Layout, Image, Type, Grid3X3 } from "lucide-react";
 
+/**
+ * The Card component is a flexible container for grouping related content.
+ *
+ * ## Features
+ * - **Composable** - Use sub-components for structured layouts
+ * - **Consistent styling** - Includes shadow, border, and rounded corners
+ * - **Flexible content** - Supports headers, footers, forms, and any content
+ *
+ * ## Sub-components
+ * | Component | Purpose |
+ * |-----------|---------|
+ * | `CardHeader` | Top section with padding |
+ * | `CardTitle` | Main heading (h3) |
+ * | `CardDescription` | Supporting text |
+ * | `CardContent` | Main content area |
+ * | `CardFooter` | Bottom section for actions |
+ *
+ * ## Common Patterns
+ * - **Form cards** - Wrap forms with actions in footer
+ * - **Stats cards** - Display metrics with badges
+ * - **Feature cards** - Icon + title + description
+ * - **Project cards** - Thumbnail + metadata + actions
+ */
 const meta: Meta<typeof Card> = {
   title: "UI/Card",
   component: Card,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `A container component for grouping related content and actions.
+
+\`\`\`tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+
+<Card>
+  <CardHeader>
+    <CardTitle>Title</CardTitle>
+    <CardDescription>Description</CardDescription>
+  </CardHeader>
+  <CardContent>Content here</CardContent>
+  <CardFooter>
+    <Button>Action</Button>
+  </CardFooter>
+</Card>
+\`\`\`
+        `,
+      },
+    },
   },
   tags: ["autodocs"],
 };

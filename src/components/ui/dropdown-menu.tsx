@@ -5,16 +5,63 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+/**
+ * A menu that appears from a trigger element for navigation and actions.
+ *
+ * @description
+ * The DropdownMenu component provides a contextual menu for actions and navigation.
+ * Built on Radix UI DropdownMenu primitive with full accessibility support including
+ * keyboard navigation, typeahead, and ARIA attributes.
+ *
+ * ## Sub-components
+ * - `DropdownMenu` - Root wrapper managing open state
+ * - `DropdownMenuTrigger` - Button that opens the menu
+ * - `DropdownMenuContent` - The menu container
+ * - `DropdownMenuItem` - Clickable menu item
+ * - `DropdownMenuCheckboxItem` - Toggleable checkbox item
+ * - `DropdownMenuRadioGroup/Item` - Radio selection items
+ * - `DropdownMenuLabel` - Non-interactive label
+ * - `DropdownMenuSeparator` - Visual divider
+ * - `DropdownMenuShortcut` - Keyboard shortcut display
+ * - `DropdownMenuSub` - Nested submenu
+ *
+ * @example
+ * ```tsx
+ * <DropdownMenu>
+ *   <DropdownMenuTrigger asChild>
+ *     <Button variant="outline">Open Menu</Button>
+ *   </DropdownMenuTrigger>
+ *   <DropdownMenuContent>
+ *     <DropdownMenuLabel>My Account</DropdownMenuLabel>
+ *     <DropdownMenuSeparator />
+ *     <DropdownMenuItem>Profile</DropdownMenuItem>
+ *     <DropdownMenuItem>Settings</DropdownMenuItem>
+ *     <DropdownMenuItem>
+ *       Logout
+ *       <DropdownMenuShortcut>⌘Q</DropdownMenuShortcut>
+ *     </DropdownMenuItem>
+ *   </DropdownMenuContent>
+ * </DropdownMenu>
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/dropdown-menu} shadcn/ui DropdownMenu documentation
+ * @see {@link https://www.radix-ui.com/primitives/docs/components/dropdown-menu} Radix UI DropdownMenu documentation
+ */
 const DropdownMenu = DropdownMenuPrimitive.Root
 
+/** Element that triggers the dropdown to open when clicked. */
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
 
+/** Groups related menu items together. */
 const DropdownMenuGroup = DropdownMenuPrimitive.Group
 
+/** Portal for rendering content outside the DOM hierarchy. */
 const DropdownMenuPortal = DropdownMenuPrimitive.Portal
 
+/** Container for nested submenu. */
 const DropdownMenuSub = DropdownMenuPrimitive.Sub
 
+/** Groups radio items for single selection. */
 const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup
 
 const DropdownMenuSubTrigger = React.forwardRef<

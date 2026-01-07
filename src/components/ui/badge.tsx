@@ -2,6 +2,29 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
+/**
+ * Badge variant styles using class-variance-authority.
+ *
+ * @description Defines all available visual variants and sizes for the Badge component.
+ *
+ * **Variants:**
+ * - `default` - Primary badge with brand colors
+ * - `secondary` - Muted background for less emphasis
+ * - `destructive` - Red/danger styling for errors or warnings
+ * - `outline` - Border only, transparent background
+ * - `success` - Green styling for positive states
+ * - `warning` - Yellow/orange styling for caution
+ * - `info` - Blue styling for informational content
+ * - `muted` - Very subtle, low-emphasis badge
+ * - `pro` - Special styling for premium/pro features
+ * - `accent` - Highlighted badge with accent colors
+ *
+ * **Sizes:**
+ * - `sm` - Extra small (10px text)
+ * - `default` - Standard size
+ * - `lg` - Larger padding
+ * - `pill` - Fully rounded ends
+ */
 const badgeVariants = cva(
   "inline-flex items-center border text-xs font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
@@ -42,10 +65,48 @@ const badgeVariants = cva(
   }
 )
 
+/**
+ * Props for the Badge component.
+ *
+ * @extends React.HTMLAttributes<HTMLDivElement>
+ * @extends VariantProps<typeof badgeVariants>
+ */
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {}
 
+/**
+ * A small label component for displaying status, categories, or counts.
+ *
+ * @description
+ * The Badge component is used to highlight an item's status or category.
+ * It supports multiple color variants for different semantic meanings
+ * and size options for various contexts.
+ *
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <Badge>New</Badge>
+ *
+ * // Status indicators
+ * <Badge variant="success">Active</Badge>
+ * <Badge variant="warning">Pending</Badge>
+ * <Badge variant="destructive">Failed</Badge>
+ *
+ * // Pill style
+ * <Badge size="pill">Premium</Badge>
+ *
+ * // With icon
+ * <Badge variant="info">
+ *   <Info className="h-3 w-3" /> Info
+ * </Badge>
+ *
+ * // Pro badge
+ * <Badge variant="pro">PRO</Badge>
+ * ```
+ *
+ * @see {@link https://ui.shadcn.com/docs/components/badge} shadcn/ui Badge documentation
+ */
 function Badge({ className, variant, size, ...props }: BadgeProps) {
   return (
     <div className={cn(badgeVariants({ variant, size }), className)} {...props} />
